@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "es2022",
+    "jsx": "preserve",
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "ESNext", "ES7"],
+    "skipLibCheck": true,
+    "strict": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "public/assets"]
+}

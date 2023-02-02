@@ -1,0 +1,43 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb", "airbnb/hooks", "airbnb-typescript", "next", "next/core-web-vitals", "prettier", "prettier/@typescript-eslint", "prettier/react"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": ["./tsconfig.json"],
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "linebreak-style": 0,
+    "object-curly-newline": 0,
+    "@typescript-eslint/semi": 0,
+    "eol-last": 0,
+    "react/function-component-definition": "off",
+    "import/prefer-default-export": 0,
+    "implicit-arrow-linebreak": 0,
+    "max-len": 0,
+    "@typescript-eslint/naming-convention": 0,
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/anchor-has-content": "off",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "consistent-return": "off",
+    "react/require-default-props": "off",
+    "prettier/prettier": "error"
+  }
+}

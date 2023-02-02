@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MetalitixLogger BabylonJS example</title>
+    <script src="../node_modules/babylonjs/babylon.js"></script>
+    <script src="../node_modules/babylonjs-loaders/babylon.glTFFileLoader.js"></script>
+    <script src="../dist/mtx-poll-babylon-js.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="renderCanvas" style="width: 100vw; height: 100vh"></canvas>
+
+    <script>
+      // Get the canvas DOM element
+      var canvas = document.getElementById('renderCanvas');
+      // Load the 3D engine
+      var engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+
+      /** METALITIX LOGGER init */
+      const metalitixLoggerAppKey = 'be1e5366-f89f-40a0-9911-5842c32c57cf';
+      const optionalPollInterval = 1000;
+      const optionalShowSurvey = true;
+      const optionalSurveyTheme = 'white';
+      const logger = new MetalitixLogger(metalitixLoggerAppKey, {
+        pollInterval: optionalPollInterval,
+        showSurvey: optionalShowSurvey,
+        surveyTheme: optionalSurveyTheme,
+      });
+
+      var delayCreateScene = function () {
+        // Create a scene.
+        var scene = new BABYLON.Scene(engine);
+
+        // Create a FreeCamera, and set its position to {x: 0, y: 5, z: -10}
+        var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
+        // Target the camera to scene origin
+        camera.setTarget(BABYLON.Vector3.Zero());
+        // Attach the camera to the canvas
+        camera.attachControl(canvas, true);
+
+        // Append glTF model to scene.
+        BABYLON.SceneLoader.Append('glTF/', 'TeaPot.gltf', scene, function (scene) {
+          // Create a default arc rotate camera and light.
+          scene.createDefaultCameraOrLight(true, true, true);
+
+          // The default camera looks at the back of the asset.
+          // Rotate the camera by 180 degrees to the front of the asset.
+          scene.activeCamera.alpha += Math.PI;
+        });
+
+        return scene;
+      };
+      // call the createScene function
+      const scene = delayCreateScene();
+
+      /** METALITIX LOGGER start logging */
+      logger.startSession(scene);
+
+      // run the render loop
+      engine.runRenderLoop(function () {
+        scene.render();
+      });
+      // the canvas/window resize event handler
+      window.addEventListener('resize', function () {
+        engine.resize();
+      });
+    </script>
+  </body>
+</html>

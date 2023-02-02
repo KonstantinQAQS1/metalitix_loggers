@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MetalitixLogger component AFRAME example</title>
+    <script src="../node_modules/aframe/dist/aframe-v1.3.0.js"></script>
+    <script src="../dist/mtx-poll-a-frame.js"></script>
+  </head>
+  <body>
+    <a-scene metalitix-logger="appkey: be1e5366-f89f-40a0-9911-5842c32c57cf; showSurvey: true">
+      <a-camera id="camera1" active="true" position="-156 136 336"></a-camera>
+      <a-camera id="camera2" look-controls active="false" position="-156 50 336" rotation="0 90 0"></a-camera>
+      <a-assets>
+        <a-asset-item id="TeaPot" src="glTF/TeaPot.gltf"></a-asset-item>
+      </a-assets>
+
+      <a-entity gltf-model="#TeaPot"></a-entity>
+      <a-entity
+        cursor="fuse: true; fuseTimeout: 500"
+        position="0 0 -1"
+        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+        material="color: black; shader: flat"
+      >
+      </a-entity>
+    </a-scene>
+
+    <script>
+      document.body.onclick = () => {
+        /** Metalitix logger will send data only for active camera automatically */
+        const camera1 = document.getElementById('camera1');
+        const camera2 = document.getElementById('camera2');
+        if (camera1.getAttribute('active') === 'true') {
+          camera1.setAttribute('active', 'false');
+          camera2.setAttribute('active', 'true');
+        } else {
+          camera1.setAttribute('active', 'true');
+          camera2.setAttribute('active', 'false');
+        }
+      };
+    </script>
+  </body>
+</html>
